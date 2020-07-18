@@ -1,0 +1,22 @@
+pipeline {
+    agent {
+            docker { image 'naik:league:0.0.1' }
+        }
+    stages {
+        stage('Build') {
+            steps {
+                sh './gradlew assemble'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './gradlew test'
+            }
+        }
+        stage('Run') {
+            steps {
+                sh './gradlew bootRun'
+            }
+        }
+    }
+}
